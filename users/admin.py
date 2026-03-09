@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import User, Role, AccessRolesRules
+from users.models import AccessRolesRules, Role, User
 
 admin.site.register(User)
 admin.site.register(Role)
