@@ -101,7 +101,9 @@ class ElementViewSet(ModelViewSet):
 
 class ProductsView(APIView):
 
-    def get(self, request):
+    def get(self, request, pk=None):
+        if pk:
+            return Response("Продукт")
         return Response(["Продукт_1", "Продукт_2", "Продукт_3"])
 
     def post(self, request):
@@ -132,7 +134,9 @@ class ProductsView(APIView):
 
 class OrdersView(APIView):
 
-    def get(self, request):
+    def get(self, request, pk=None):
+        if pk:
+            return Response("Заказ")
         return Response(["Заказ_1", "Заказ_2", "Заказ_3"])
 
     def post(self, request):
