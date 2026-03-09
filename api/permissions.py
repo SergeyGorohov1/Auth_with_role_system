@@ -1,5 +1,7 @@
 from rest_framework.permissions import BasePermission
-from users.models import AccessRolesRules
+
+from elements.models import Element
+from users.models import AccessRolesRules, User
 
 
 class CanAccessObject(BasePermission):
@@ -7,11 +9,16 @@ class CanAccessObject(BasePermission):
         self.object = object
 
     def has_permission(self, request, view):
-        user = request.user
-        role = user.role
+        role = request.user.role
+
+        try:
+            element = Element.objects.get(name=self.object)
+        except Element.DoesNotExist:
+            return False
+
         if role:
             try:
-                access_roles_rules = AccessRolesRules.objects.get(role=role, element=self.object)
+                access_roles_rules = AccessRolesRules.objects.get(role=role, element=element)
                 if request.method == "POST":
                     return access_roles_rules.create_permission
                 elif request.method == "GET":
@@ -23,3 +30,11 @@ class CanAccessObject(BasePermission):
             except AccessRolesRules.DoesNotExist:
                 return False
         return False
+
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if type(obj) == User:
+            return obj == request.user
+        else:
+            return obj.owner == request.user
