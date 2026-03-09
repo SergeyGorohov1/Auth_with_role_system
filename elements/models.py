@@ -6,7 +6,9 @@ class Element(models.Model):
         ("users", "Пользователи"),
         ("products", "Товары"),
         ("orders", "Заказы"),
-        ("permissions", "Права доступа")
+        ("roles", "Роли"),
+        ("permissions", "Права доступа"),
+        ("elements", "Элементы"),
     ]
 
     name = models.CharField(max_length=11, choices=ELEMENTS_IN_PROJECT, unique=True, verbose_name="Элемент")
