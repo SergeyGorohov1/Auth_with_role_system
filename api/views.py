@@ -2,10 +2,15 @@ from rest_framework import status
 from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
-from users.models import User
+from api.permissions import CanAccessObject
+from elements.models import Element
 
-from api.serializers import UserRegisterSerializer, UserSerializer, ChangePasswordSerializer
+from users.models import User, Role
+
+from api.serializers import UserRegisterSerializer, UserSerializer, ChangePasswordSerializer, RoleSerializer, \
+    ElementSerializer
 
 
 class UserRegisterApiView(CreateAPIView):
@@ -37,3 +42,19 @@ class UserChangePasswordApiView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"detail": "Пароль успешно изменён"}, status=status.HTTP_200_OK)
+
+
+class RoleViewSet(ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+
+    def get_permissions(self):
+        return [CanAccessObject(object='roles')]
+
+
+class ElementViewSet(ModelViewSet):
+    queryset = Element.objects.all()
+    serializer_class = ElementSerializer
+
+    def get_permissions(self):
+        return [CanAccessObject(object='elements')]
