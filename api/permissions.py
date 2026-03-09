@@ -34,7 +34,7 @@ class CanAccessObject(BasePermission):
 
 class IsOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
-        if type(obj) == User:
+        if type(obj) is User:
             return obj == request.user
         else:
             return obj.owner == request.user
