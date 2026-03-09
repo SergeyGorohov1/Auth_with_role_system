@@ -1,3 +1,19 @@
 from django.db import models
 
-# Create your models here.
+
+class Element(models.Model):
+    ELEMENTS_IN_PROJECT = [
+        ("users", "Пользователи"),
+        ("products", "Товары"),
+        ("orders", "Заказы"),
+        ("permissions", "Права доступа")
+    ]
+
+    name = models.CharField(max_length=11, choices=ELEMENTS_IN_PROJECT, unique=True, verbose_name="Элемент")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Элемент'
+        verbose_name_plural = 'Элементы'
