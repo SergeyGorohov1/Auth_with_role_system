@@ -7,10 +7,10 @@ from rest_framework.viewsets import ModelViewSet
 from api.permissions import CanAccessObject, IsOwner
 from elements.models import Element
 
-from users.models import User, Role
+from users.models import User, Role, AccessRolesRules
 
 from api.serializers import UserRegisterSerializer, UserSerializer, ChangePasswordSerializer, RoleSerializer, \
-    ElementSerializer
+    ElementSerializer, AccessRolesRulesSerializer
 
 
 class UserRegisterApiView(CreateAPIView):
@@ -74,6 +74,14 @@ class UserChangePasswordApiView(GenericAPIView):
         return Response({"detail": "Пароль успешно изменён"}, status=status.HTTP_200_OK)
 
 
+class AccessRolesRulesViewSet(ModelViewSet):
+    queryset = AccessRolesRules.objects.all()
+    serializer_class = AccessRolesRulesSerializer
+
+    def get_permissions(self):
+        return [IsAuthenticated(), CanAccessObject(object='permissions')]
+
+
 class RoleViewSet(ModelViewSet):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
@@ -88,3 +96,6 @@ class ElementViewSet(ModelViewSet):
 
     def get_permissions(self):
         return [IsAuthenticated(), CanAccessObject(object='elements')]
+
+
+

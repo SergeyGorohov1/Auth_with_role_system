@@ -3,11 +3,12 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from api.views import UserRegisterApiView, UserRetrieveUpdateDestroyApiView, UserChangePasswordApiView, RoleViewSet, \
-    ElementViewSet, UserListApiView, UserRetrieveUpdateDestroyOtherUsersApiView
+    ElementViewSet, UserListApiView, UserRetrieveUpdateDestroyOtherUsersApiView, AccessRolesRulesViewSet
 
 router = DefaultRouter()
 router.register(r'roles', RoleViewSet, basename='roles')
 router.register(r'elements', ElementViewSet, basename='elements')
+router.register(r'access_roles_rules', AccessRolesRulesViewSet, basename='access_roles_rules')
 
 
 urlpatterns = [
