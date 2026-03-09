@@ -11,6 +11,7 @@ from users.models import Role, User
 
 
 class UserRegisterApiView(CreateAPIView):
+    """Контроллер регистрации пользователя"""
     serializer_class = UserRegisterSerializer
     permission_classes = (AllowAny,)
 
@@ -22,6 +23,7 @@ class UserRegisterApiView(CreateAPIView):
 
 
 class UserListApiView(ListAPIView):
+    """Контроллер просмотра списка пользователей"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -30,6 +32,7 @@ class UserListApiView(ListAPIView):
 
 
 class UserRetrieveUpdateDestroyOtherUsersApiView(RetrieveUpdateDestroyAPIView):
+    """Контроллер чтения, изменения, удаления Пользователя через pk"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -46,6 +49,7 @@ class UserRetrieveUpdateDestroyOtherUsersApiView(RetrieveUpdateDestroyAPIView):
 
 
 class UserRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
+    """Контроллер чтения, изменения, удаления авторизованного пользователя"""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -62,6 +66,7 @@ class UserRetrieveUpdateDestroyApiView(RetrieveUpdateDestroyAPIView):
 
 
 class UserChangePasswordApiView(GenericAPIView):
+    """Контроллер смены пароля авторизованного пользователя"""
     serializer_class = ChangePasswordSerializer
 
     def post(self, request, *args, **kwargs):

@@ -7,6 +7,7 @@ from users.models import AccessRolesRules, Role
 
 
 class AccessRolesRulesViewSet(ModelViewSet):
+    """Viewset прав доступа"""
     queryset = AccessRolesRules.objects.all()
     serializer_class = AccessRolesRulesSerializer
 
@@ -15,6 +16,7 @@ class AccessRolesRulesViewSet(ModelViewSet):
 
 
 class RoleViewSet(ModelViewSet):
+    """Viewset ролей"""
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
 

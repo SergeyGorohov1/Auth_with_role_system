@@ -10,6 +10,7 @@ from elements.models import Element
 
 
 class ElementViewSet(ModelViewSet):
+    """Viewset элементов"""
     queryset = Element.objects.all()
     serializer_class = ElementSerializer
 
@@ -18,7 +19,7 @@ class ElementViewSet(ModelViewSet):
 
 
 class ProductsView(APIView):
-
+    """Mock-view для Продуктов"""
     def get(self, request, pk=None):
         if pk:
             return Response("Продукт")
@@ -51,6 +52,7 @@ class ProductsView(APIView):
 
 
 class OrdersView(APIView):
+    """Mock-view для Заказов"""
 
     def get(self, request, pk=None):
         if pk:

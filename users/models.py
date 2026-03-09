@@ -12,7 +12,7 @@ class Role(models.Model):
         ("guest", "Гость")
     ]
 
-    name = models.CharField(max_length=7, choices=ROLES, default="user", unique=True, verbose_name="роль")
+    name = models.CharField(max_length=7, choices=ROLES, default="user", unique=True, verbose_name="Роль")
 
     def __str__(self):
         return self.name
@@ -42,9 +42,9 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=150, null=True, blank=True, verbose_name="имя")
-    last_name = models.CharField(max_length=150, null=True, blank=True, verbose_name="фамилия")
-    patronymic = models.CharField(max_length=150, null=True, blank=True, verbose_name="отчество")
+    first_name = models.CharField(max_length=150, null=True, blank=True, verbose_name="Имя")
+    last_name = models.CharField(max_length=150, null=True, blank=True, verbose_name="Фамилия")
+    patronymic = models.CharField(max_length=150, null=True, blank=True, verbose_name="Отчество")
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = CustomUserManager()
@@ -61,8 +61,8 @@ class User(AbstractUser):
 
 
 class AccessRolesRules(models.Model):
-    role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="роль")
-    element = models.ForeignKey(Element, on_delete=models.CASCADE, verbose_name="элемент")
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="Роль")
+    element = models.ForeignKey(Element, on_delete=models.CASCADE, verbose_name="Элемент")
 
     read_all_permission = models.BooleanField(default=False)
     create_permission = models.BooleanField(default=False)
