@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
+from elements.models import Element
+
 
 class Role(models.Model):
     ROLES = [
@@ -57,4 +59,23 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-# class AccessRolesRules(models.Model):
+
+class AccessRolesRules(models.Model):
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="роль")
+    element = models.ForeignKey(Element, on_delete=models.CASCADE, verbose_name="элемент")
+
+    read_all_permission = models.BooleanField(default=False)
+    create_permission = models.BooleanField(default=False)
+    update_all_permission = models.BooleanField(default=False)
+    delete_all_permission = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Право доступа'
+        verbose_name_plural = 'Права доступа'
+
+    def __str__(self):
+        return f"{self.role.name}; {self.element.name}; " \
+               f"(read_all: {self.read_all_permission}, " \
+               f"create: {self.create_permission}, " \
+               f"update_all: {self.update_all_permission}, " \
+               f"delete_all: {self.delete_all_permission})"
