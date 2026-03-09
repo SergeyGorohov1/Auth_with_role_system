@@ -72,6 +72,9 @@ class AccessRolesRules(models.Model):
     class Meta:
         verbose_name = 'Право доступа'
         verbose_name_plural = 'Права доступа'
+        constraints = [
+            models.UniqueConstraint(fields=['role', 'element'], name='unique_role_element')
+        ]
 
     def __str__(self):
         return f"{self.role.name}; {self.element.name}; " \
