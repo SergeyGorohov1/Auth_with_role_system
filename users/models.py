@@ -2,6 +2,24 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
+class Role(models.Model):
+    ROLES = [
+        ("admin", "Админ"),
+        ("manager", "Менеджер"),
+        ("user", "Пользователь"),
+        ("guest", "Гость")
+    ]
+
+    name = models.CharField(max_length=7, choices=ROLES, default="user", unique=True, verbose_name="роль")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Роль'
+        verbose_name_plural = 'Роли'
+
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -25,6 +43,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=150, null=True, blank=True, verbose_name="имя")
     last_name = models.CharField(max_length=150, null=True, blank=True, verbose_name="фамилия")
     patronymic = models.CharField(max_length=150, null=True, blank=True, verbose_name="отчество")
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
 
     objects = CustomUserManager()
 
@@ -37,3 +56,5 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+# class AccessRolesRules(models.Model):
