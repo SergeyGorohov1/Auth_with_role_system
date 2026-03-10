@@ -3,14 +3,14 @@
 {% block title %}{{ name }}{% endblock %}
 
 {% block content %}
-    <a href="{% url 'elements:elements_create' %}" class="btn btn-primary mb-3">Создать</a>
+    <a href="/{{ url_name }}/create/" class="btn btn-primary mb-3">Создать</a>
     <div class="row justify-content-center gx-5">
         {% for object in object_list %}
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card">
                     <h5 class="card-title text-center">{{ object.name }}</h5>
-                    <a href="{% url 'elements:elements_update' object.pk %}" class="btn btn-primary mb-2">Изменить</a>
-                    <a href="{% url 'elements:elements_delete' object.pk %}" class="btn btn-primary">Удалить</a>
+                    <a href="/{{ url_name }}/{{ object.pk }}/update/" class="btn btn-primary mb-2">Изменить</a>
+                    <a href="/{{ url_name }}/{{ object.pk }}/delete/" class="btn btn-primary">Удалить</a>
                 </div>
 
             </div>
