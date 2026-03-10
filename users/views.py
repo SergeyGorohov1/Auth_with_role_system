@@ -1,11 +1,12 @@
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
-from users.forms import UserRegisterForm, RoleForm, AccessRolesRulesForm
+from users.forms import UserRegisterForm, RoleForm, AccessRolesRulesForm, UserUpdateForm
 from users.models import User, Role, AccessRolesRules
 from users.permissions import can_access_object
 
@@ -21,6 +22,73 @@ class RegisterView(CreateView):
         form.instance.role = role
         messages.success(self.request, 'Регистрация прошла успешно!')
         return super().form_valid(form)
+
+
+class UserListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = User
+    template_name = "list.html"
+    extra_context = {"name": "Пользователи", "url_name": "users"}
+
+    def test_func(self):
+        return can_access_object(self.request, "users")
+
+
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy("elements:home")
+    template_name = "form.html"
+    extra_context = {"name": "Пользователь"}
+
+    def test_func(self):
+        return can_access_object(self.request, "users")
+
+
+class UserUpdateMeView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy("elements:home")
+    template_name = "form.html"
+    extra_context = {"name": "Пользователь"}
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy("elements:home")
+    template_name = "confirm_delete.html"
+    extra_context = {"name": "Пользователь", "url_name": "users"}
+
+    def test_func(self):
+        return can_access_object(self.request, "users")
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        self.object.is_active = False
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class UserDeleteMeView(LoginRequiredMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy("elements:home")
+    template_name = "confirm_delete.html"
+    extra_context = {"name": "Пользователь"}
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        self.object.is_active = False
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 def logout_view(request):

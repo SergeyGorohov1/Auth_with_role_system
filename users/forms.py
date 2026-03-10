@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.forms import ModelForm
 
 from users.models import User, Role, AccessRolesRules
@@ -17,6 +17,18 @@ class UserRegisterForm(UserCreationForm):
 
             if field_name in self.errors:
                 field.widget.attrs['class'] += ' is-invalid'
+
+
+class UserUpdateForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "patronymic")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
 
 class CustomAuthenticationForm(AuthenticationForm):
