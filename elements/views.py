@@ -2,13 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, View
+from django.views.generic import (CreateView, DeleteView, ListView,
+                                  TemplateView, UpdateView, View)
 
 from elements.forms import ElementForm
-from users.permissions import can_access_object
-
 from elements.models import Element
+from users.permissions import can_access_object
 
 
 # Контроллеры работы с Элементами

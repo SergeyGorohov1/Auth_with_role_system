@@ -1,9 +1,12 @@
 from django.urls import path
 
-from elements.views import home, ElementsListView, ElementsCreateView, ElementsUpdateView, ElementsDeleteView, \
-    ProductsListView, ProductsCreateView, ProductsUpdateView, ProductsDeleteView, OrdersListView, OrdersCreateView, \
-    OrdersUpdateView, OrdersDeleteView
 from elements.apps import ElementsConfig
+from elements.views import (ElementsCreateView, ElementsDeleteView,
+                            ElementsListView, ElementsUpdateView,
+                            OrdersCreateView, OrdersDeleteView, OrdersListView,
+                            OrdersUpdateView, ProductsCreateView,
+                            ProductsDeleteView, ProductsListView,
+                            ProductsUpdateView, home)
 
 app_name = ElementsConfig.name
 

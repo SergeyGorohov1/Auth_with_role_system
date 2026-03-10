@@ -1,14 +1,15 @@
-from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from users.forms import UserRegisterForm, RoleForm, AccessRolesRulesForm, UserUpdateForm, CustomPasswordChangeForm
-from users.models import User, Role, AccessRolesRules
+from users.forms import (AccessRolesRulesForm, CustomPasswordChangeForm,
+                         RoleForm, UserRegisterForm, UserUpdateForm)
+from users.models import AccessRolesRules, Role, User
 from users.permissions import can_access_object
 
 
