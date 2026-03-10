@@ -1,12 +1,13 @@
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
-from users.forms import UserRegisterForm, RoleForm, AccessRolesRulesForm, UserUpdateForm
+from users.forms import UserRegisterForm, RoleForm, AccessRolesRulesForm, UserUpdateForm, CustomPasswordChangeForm
 from users.models import User, Role, AccessRolesRules
 from users.permissions import can_access_object
 
@@ -89,6 +90,12 @@ class UserDeleteMeView(LoginRequiredMixin, DeleteView):
         self.object.save()
 
         return HttpResponseRedirect(self.get_success_url())
+
+
+class PasswordChangeMeView(LoginRequiredMixin, PasswordChangeView):
+    template_name = "users/password_change_form.html"
+    success_url = reverse_lazy("elements:home")
+    form_class = CustomPasswordChangeForm
 
 
 def logout_view(request):

@@ -22,6 +22,8 @@
                     <span class="navbar-text me-3">Hello, {{ user }}</span>
                 </li>
                 <li class="nav-item"><a href="{% url 'users:edit' %}" class="nav-link">Изменить профиль</a></li>
+                <li class="nav-item"><a href="{% url 'users:password_change' %}" class="nav-link">Изменить пароль</a></li>
+                <li class="nav-item"><a href="{% url 'users:delete' %}" class="nav-link">Удалить профиль</a></li>
                 <li class="nav-item"><a href="{% url 'users:logout' %}" class="nav-link">Выход</a></li>
             {% endif %}
         </ul>

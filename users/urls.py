@@ -1,12 +1,12 @@
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import LoginView
 from django.urls import path
 
-from elements.views import ElementsListView
+
 from users.apps import UsersConfig
 from users.forms import CustomAuthenticationForm
 from users.views import RegisterView, logout_view, RoleCreateView, RoleListView, RoleUpdateView, RoleDeleteView, \
     PermissionsCreateView, PermissionsDeleteView, PermissionsUpdateView, PermissionsListView, UserDeleteView, \
-    UserUpdateView, UserListView, UserUpdateMeView, UserDeleteMeView
+    UserUpdateView, UserListView, UserUpdateMeView, UserDeleteMeView, PasswordChangeMeView
 
 app_name = UsersConfig.name
 
@@ -17,8 +17,8 @@ urlpatterns = [
     path("logout/", logout_view, name="logout"),
 
     # url-адреса смены пароля
-    path("password-change/", PasswordChangeView.as_view(), name="password_change"),
-    path("password-change/done/", PasswordChangeDoneView.as_view(), name="password_change_done"),
+    path("password-change/", PasswordChangeMeView.as_view(template_name="users/password_change_form.html"),
+         name="password_change"),
 
     path("register/", RegisterView.as_view(), name="register"),
     path("my_profile/edit/", UserUpdateMeView.as_view(), name="edit"),
