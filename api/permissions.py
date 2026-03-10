@@ -5,6 +5,11 @@ from users.models import AccessRolesRules, User
 
 
 class CanAccessObject(BasePermission):
+    """
+    Право, реализующее основную логику работы с правами для данного проекта.
+    Доступ к контроллеру устанавливается в зависимости от прав, описанных в
+    объектах модели AccessRolesRules.
+    """
     def __init__(self, object):
         self.object = object
 
@@ -33,6 +38,7 @@ class CanAccessObject(BasePermission):
 
 
 class IsOwner(BasePermission):
+    """Право, для проверки владельца обекта"""
     def has_object_permission(self, request, view, obj):
         if type(obj) is User:
             return obj == request.user

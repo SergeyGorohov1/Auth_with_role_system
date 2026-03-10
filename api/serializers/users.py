@@ -6,6 +6,7 @@ from users.models import User
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
+    """Сериализатор для регистрации пользователя"""
     password_confirm = serializers.CharField(max_length=128, write_only=True)
 
     class Meta:
@@ -24,6 +25,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         validated_data.pop('password_confirm')
         user = User(**validated_data)
         try:
+            # Доп. валидация на схожесть пароля с email
             validate_password(validated_data["password"], user)
             user.set_password(user.password)
             user.save()
@@ -39,6 +41,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ChangePasswordSerializer(serializers.Serializer):
+    """Сериализатор для смены пароля пользователя"""
     old_password = serializers.CharField(required=True, write_only=True)
     new_password = serializers.CharField(required=True, write_only=True)
     confirm_password = serializers.CharField(required=True, write_only=True)

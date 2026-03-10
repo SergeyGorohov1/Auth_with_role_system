@@ -5,6 +5,7 @@ from elements.models import Element
 
 
 class Role(models.Model):
+    """Роли пользователей"""
     ROLES = [
         ("admin", "Админ"),
         ("manager", "Менеджер"),
@@ -61,6 +62,7 @@ class User(AbstractUser):
 
 
 class AccessRolesRules(models.Model):
+    """Права для бизнес эл-в проекта, в зависимости от ролей пользователей"""
     role = models.ForeignKey(Role, on_delete=models.CASCADE, verbose_name="Роль")
     element = models.ForeignKey(Element, on_delete=models.CASCADE, verbose_name="Элемент")
 

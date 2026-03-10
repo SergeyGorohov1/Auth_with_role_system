@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Element(models.Model):
+    """Бизнес эл-ты, присутствующие в проекте"""
     ELEMENTS_IN_PROJECT = [
         ("users", "Пользователи"),
         ("products", "Товары"),

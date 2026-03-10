@@ -13,6 +13,7 @@ from users.models import AccessRolesRules, Role, User
 from users.permissions import can_access_object
 
 
+# Контроллеры работы с Пользователем
 class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
@@ -104,6 +105,7 @@ def logout_view(request):
     return redirect("/")
 
 
+# Контроллеры работы с Role
 class RoleListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Role
     template_name = "list.html"
@@ -145,6 +147,7 @@ class RoleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return can_access_object(self.request, "roles")
 
 
+# Контроллеры работы с AccessRolesRules
 class PermissionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = AccessRolesRules
     template_name = "list.html"

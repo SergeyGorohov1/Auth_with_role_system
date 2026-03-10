@@ -6,6 +6,7 @@ from users.models import AccessRolesRules, Role, User
 
 
 class UserRegisterForm(UserCreationForm):
+    """Форма регистрации"""
     class Meta:
         model = User
         fields = ("email", "first_name", "last_name", "patronymic", "password1", "password2")
@@ -21,6 +22,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):
+    """Форма смены пароля авторизованногго пользователя"""
     class Meta:
         model = User
         fields = "__all__"
@@ -35,6 +37,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 
 
 class UserUpdateForm(ModelForm):
+    """Форма изменения пользователя"""
     class Meta:
         model = User
         fields = ("first_name", "last_name", "patronymic")
@@ -47,6 +50,7 @@ class UserUpdateForm(ModelForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
+    """Форма авторизации пользователя"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

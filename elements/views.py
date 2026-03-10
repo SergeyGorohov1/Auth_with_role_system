@@ -58,7 +58,6 @@ class ElementsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 # Контроллеры работы с Продуктами
-
 class ProductsListView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = "list.html"
     extra_context = {"name": "Продукты", "url_name": "products"}
