@@ -77,8 +77,4 @@ class AccessRolesRules(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.role.name}; {self.element.name}; " \
-               f"(read_all: {self.read_all_permission}, " \
-               f"create: {self.create_permission}, " \
-               f"update_all: {self.update_all_permission}, " \
-               f"delete_all: {self.delete_all_permission})"
+        return f"{self.role.name}; {self.element.name}"
