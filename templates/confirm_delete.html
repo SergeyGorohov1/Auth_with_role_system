@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Удалить {{ name }}{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h6>Удаление объекта</h6>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg btn-outline-success">Подтвердить</button>
+                    <a class="btn btn-lg btn-outline-danger" href="{% url 'elements:elements_list' %}">Отменить</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
