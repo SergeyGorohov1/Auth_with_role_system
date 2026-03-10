@@ -1,11 +1,13 @@
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
-from users.forms import UserRegisterForm
-from users.models import User, Role
+from users.forms import UserRegisterForm, RoleForm, AccessRolesRulesForm
+from users.models import User, Role, AccessRolesRules
+from users.permissions import can_access_object
 
 
 class RegisterView(CreateView):
@@ -24,3 +26,85 @@ class RegisterView(CreateView):
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+
+class RoleListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = Role
+    template_name = "list.html"
+    extra_context = {"name": "Роли", "url_name": "roles"}
+
+    def test_func(self):
+        return can_access_object(self.request, "roles")
+
+
+class RoleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Role
+    form_class = RoleForm
+    success_url = reverse_lazy("elements:home")
+    template_name = "form.html"
+    extra_context = {"name": "Роль"}
+
+    def test_func(self):
+        return can_access_object(self.request, "roles")
+
+
+class RoleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Role
+    form_class = RoleForm
+    success_url = reverse_lazy("elements:home")
+    template_name = "form.html"
+    extra_context = {"name": "Роль"}
+
+    def test_func(self):
+        return can_access_object(self.request, "roles")
+
+
+class RoleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Role
+    success_url = reverse_lazy("elements:home")
+    template_name = "confirm_delete.html"
+    extra_context = {"name": "Роль", "url_name": "roles"}
+
+    def test_func(self):
+        return can_access_object(self.request, "roles")
+
+
+class PermissionsListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = AccessRolesRules
+    template_name = "list.html"
+    extra_context = {"name": "Права доступа", "url_name": "permissions"}
+
+    def test_func(self):
+        return can_access_object(self.request, "permissions")
+
+
+class PermissionsCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = AccessRolesRules
+    form_class = AccessRolesRulesForm
+    success_url = reverse_lazy("elements:home")
+    template_name = "form.html"
+    extra_context = {"name": "Право доступа"}
+
+    def test_func(self):
+        return can_access_object(self.request, "permissions")
+
+
+class PermissionsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = AccessRolesRules
+    form_class = AccessRolesRulesForm
+    success_url = reverse_lazy("elements:home")
+    template_name = "form.html"
+    extra_context = {"name": "Право доступа"}
+
+    def test_func(self):
+        return can_access_object(self.request, "permissions")
+
+
+class PermissionsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = AccessRolesRules
+    success_url = reverse_lazy("elements:home")
+    template_name = "confirm_delete.html"
+    extra_context = {"name": "Право доступа", "url_name": "permissions"}
+
+    def test_func(self):
+        return can_access_object(self.request, "permissions")

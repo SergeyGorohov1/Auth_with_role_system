@@ -8,7 +8,11 @@
         {% for object in object_list %}
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card">
-                    <h5 class="card-title text-center">{{ object.name }}</h5>
+                    {% if object.name %}
+                        <h5 class="card-title text-center">{{ object.name }}</h5>
+                    {% else %}
+                        <h5 class="card-title text-center">{{ object }}</h5>
+                    {% endif %}
                     <a href="/{{ url_name }}/{{ object.pk }}/update/" class="btn btn-primary mb-2">Изменить</a>
                     <a href="/{{ url_name }}/{{ object.pk }}/delete/" class="btn btn-primary">Удалить</a>
                 </div>

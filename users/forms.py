@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms import ModelForm
 
-from users.models import User
+from users.models import User, Role, AccessRolesRules
 
 
 class UserRegisterForm(UserCreationForm):
@@ -27,3 +28,34 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'class': 'form-control',
                 'placeholder': self.fields[field_name].label
             })
+
+
+class RoleForm(ModelForm):
+    class Meta:
+        model = Role
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name in self.fields:
+            self.fields[field_name].widget.attrs.update({
+                'class': 'form-control'
+            })
+
+
+class AccessRolesRulesForm(ModelForm):
+    class Meta:
+        model = AccessRolesRules
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name in self.fields:
+            if "permission" in field_name:
+                self.fields[field_name].widget.attrs.update({'class': 'form-check-input'})
+            else:
+                self.fields[field_name].widget.attrs.update({
+                    'class': 'form-control'
+                })

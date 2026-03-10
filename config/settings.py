@@ -149,3 +149,4 @@ SIMPLE_JWT = {
 }
 
 LOGIN_REDIRECT_URL = "elements:home"
+LOGIN_URL = "users:login"
