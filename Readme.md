@@ -186,7 +186,7 @@ P.S. При удалении пользователя, не происходит
 <a name="analog"></a>
 Контроллеры используют класс-право CanAccessObject, описанное в модуле [permissions.py](api/permissions.py).
 Экземпляр класса принимает аргумент, в зависимости от сущности контроллеров, к которым применяется. Например,
-для контроллеров работы с объектами Role, вызов данного экземпляра класса, будет вылядеть
+для контроллеров работы с объектами Role, вызов данного экземпляра класса, будет выглядеть
 ```python
 CanAccessObject(object='roles')
 ```
@@ -287,4 +287,4 @@ python manage.py runserver
 проверки функционала с использованием веб-интерфейса. Проект, состоящий только из api части, располагается
 в ветке [feature/task-api](https://github.com/SergeyGorohov1/Auth_with_role_system/tree/feature/task-api).
 
-Для тестирования api части, приложена [коллекция](Test_task.postman_collection.json) postman
+Для тестирования api части, приложена [коллекция](Test_task.postman_collection.json) postman.
