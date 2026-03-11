@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Создать{% else %}Изменить{% endif %} {{name}}{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" enctype="multipart/form-data" class="text-center">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if object %}
+                    <button type="submit" class="w-50 btn btn-lg btn-outline-primary">Изменить</button>
+                {% else %}
+                    <button type="submit" class="w-50 btn btn-lg btn-outline-primary">Создать</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
