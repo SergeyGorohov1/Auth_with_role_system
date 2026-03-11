@@ -10,7 +10,7 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from users.forms import (AccessRolesRulesForm, CustomPasswordChangeForm,
                          RoleForm, UserRegisterForm, UserUpdateForm)
 from users.models import AccessRolesRules, Role, User
-from users.permissions import can_access_object
+from users.permissions import can_access_object, is_owner
 
 
 # Контроллеры работы с Пользователем
@@ -44,7 +44,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     extra_context = {"name": "Пользователь"}
 
     def test_func(self):
-        return can_access_object(self.request, "users")
+        return can_access_object(self.request, "users") or is_owner(self.request, self.get_object())
 
 
 class UserUpdateMeView(LoginRequiredMixin, UpdateView):
@@ -65,7 +65,7 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     extra_context = {"name": "Пользователь", "url_name": "users"}
 
     def test_func(self):
-        return can_access_object(self.request, "users")
+        return can_access_object(self.request, "users") or is_owner(self.request, self.get_object())
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
