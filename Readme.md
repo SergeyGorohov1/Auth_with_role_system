@@ -286,3 +286,5 @@ python manage.py runserver
 Часть приложения, реализованная с использованием шаблонов django, носит тестирующий характер и реализована для 
 проверки функционала с использованием веб-интерфейса. Проект, состоящий только из api части, располагается
 в ветке [feature/task-api](https://github.com/SergeyGorohov1/Auth_with_role_system/tree/feature/task-api).
+
+Для тестирования api части, приложена [коллекция](Test_task.postman_collection.json) postman
