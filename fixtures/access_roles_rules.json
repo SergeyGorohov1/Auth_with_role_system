@@ -1,0 +1,146 @@
+[
+  {
+    "model": "users.accessrolesrules",
+    "pk": 1,
+    "fields": {
+      "role": 1,
+      "element": 1,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 2,
+    "fields": {
+      "role": 1,
+      "element": 2,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 3,
+    "fields": {
+      "role": 1,
+      "element": 3,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 4,
+    "fields": {
+      "role": 1,
+      "element": 4,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 5,
+    "fields": {
+      "role": 1,
+      "element": 5,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 7,
+    "fields": {
+      "role": 3,
+      "element": 2,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 8,
+    "fields": {
+      "role": 3,
+      "element": 3,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 10,
+    "fields": {
+      "role": 4,
+      "element": 2,
+      "read_all_permission": true,
+      "create_permission": false,
+      "update_all_permission": false,
+      "delete_all_permission": false
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 11,
+    "fields": {
+      "role": 4,
+      "element": 3,
+      "read_all_permission": true,
+      "create_permission": false,
+      "update_all_permission": false,
+      "delete_all_permission": false
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 13,
+    "fields": {
+      "role": 2,
+      "element": 2,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": false
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 16,
+    "fields": {
+      "role": 1,
+      "element": 6,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  },
+  {
+    "model": "users.accessrolesrules",
+    "pk": 17,
+    "fields": {
+      "role": 3,
+      "element": 6,
+      "read_all_permission": true,
+      "create_permission": true,
+      "update_all_permission": true,
+      "delete_all_permission": true
+    }
+  }
+]
